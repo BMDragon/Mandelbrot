@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.ScrollEvent;
 import javafx.stage.Stage;
 import mandelbrot.model.Grid;
 import mandelbrot.view.CanvasView;
@@ -14,6 +15,7 @@ import mandelbrot.view.UIContainer;
 
 public class Controller extends Application {
     private static final int MAX_ITERATIONS = 1000;
+    private static final int PANNING_SCALE = 80;
 
     private Scene stage;
     private UIContainer scene;
@@ -27,7 +29,7 @@ public class Controller extends Application {
         scene.getDropDown().setOnAction(handleDropDown());
         stage = new Scene(scene.getPane(), CanvasView.WIDTH + 200, CanvasView.WIDTH);
         stage.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
-        stage.setOnScroll(e -> handleScroll());
+        stage.setOnScroll(e -> handleScroll(e));
         primaryStage.setScene(stage);
         primaryStage.show();
     }
@@ -55,7 +57,30 @@ public class Controller extends Application {
         switch (code) {
             case W -> {
                 if (loaded) {
-
+                    rulebook.setCenter(rulebook.getCenterReal(),
+                            rulebook.getCenterImaginary() + rulebook.getWidth() / PANNING_SCALE);
+                    backToFront();
+                }
+            }
+            case S -> {
+                if (loaded) {
+                    rulebook.setCenter(rulebook.getCenterReal(),
+                            rulebook.getCenterImaginary() - rulebook.getWidth() / PANNING_SCALE);
+                    backToFront();
+                }
+            }
+            case A -> {
+                if (loaded) {
+                    rulebook.setCenter(rulebook.getCenterReal() + rulebook.getWidth() / PANNING_SCALE,
+                            rulebook.getCenterImaginary());
+                    backToFront();
+                }
+            }
+            case D -> {
+                if (loaded) {
+                    rulebook.setCenter(rulebook.getCenterReal() - rulebook.getWidth() / PANNING_SCALE,
+                            rulebook.getCenterImaginary());
+                    backToFront();
                 }
             }
             default -> {
@@ -63,7 +88,7 @@ public class Controller extends Application {
         }
     }
 
-    private void handleScroll() {
+    private void handleScroll(ScrollEvent e) {
 
     }
 

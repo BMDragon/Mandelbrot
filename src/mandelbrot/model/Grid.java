@@ -64,5 +64,13 @@ public abstract class Grid {
         return screen.get(xIndex).get(yIndex);
     }
 
+    public double getCenterReal(){
+        return center.getReal();
+    }
+
+    public double getCenterImaginary(){
+        return center.getImaginary();
+    }
+
     public abstract int iterate(Complex fixed, Complex varied, int maxIter);
 }
