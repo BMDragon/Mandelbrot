@@ -3,7 +3,7 @@ package mandelbrot.model;
 import java.util.ArrayList;
 
 public abstract class Grid {
-    private static final double INITIAL_WIDTH = 4.0;
+    private static final double INITIAL_WIDTH = 3.2;
 
     private ArrayList<ArrayList<Integer>> screen;
     private Complex center;

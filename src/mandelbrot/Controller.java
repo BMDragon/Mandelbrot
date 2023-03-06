@@ -44,6 +44,8 @@ public class Controller extends Application {
                         | ClassNotFoundException e1) {
                     e1.printStackTrace();
                 }
+                loaded = true;
+                backToFront();
             }
         };
         return event;
@@ -52,12 +54,25 @@ public class Controller extends Application {
     private void handleKeyInput(KeyCode code) {
         switch (code) {
             case W -> {
-                
+                if (loaded) {
+
+                }
+            }
+            default -> {
             }
         }
     }
 
     private void handleScroll() {
 
+    }
+
+    private void backToFront() {
+        rulebook.updateGrid(MAX_ITERATIONS);
+        for (int i = 0; i < CanvasView.WIDTH; i++) {
+            for (int j = 0; j < CanvasView.WIDTH; j++) {
+                scene.setPixel(i, j, rulebook.getPixelValue(i, j));
+            }
+        }
     }
 }

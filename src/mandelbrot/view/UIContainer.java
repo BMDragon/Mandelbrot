@@ -30,6 +30,10 @@ public class UIContainer {
         return dropDown;
     }
 
+    public void setPixel(int xIndex, int yIndex, int numIter){
+        canvas.updatePixel(xIndex, yIndex, numIter);
+    }
+
     private ComboBox<String> makeDropDown(){
         ComboBox<String> ret = new ComboBox<>(FXCollections.observableArrayList(RULES));
         ret.setLayoutX(CanvasView.WIDTH + 30);
