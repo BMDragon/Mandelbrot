@@ -21,6 +21,7 @@ public abstract class Grid {
 
     public void updateGrid(int maxIter) {
         double xPos, yPos;
+        screen = new ArrayList<>();
         for (int i = 0; i < pixelsAcross; i++) {
             ArrayList<Integer> column = new ArrayList<>();
             xPos = -width / 2 + center.getReal() + i * width / pixelsAcross;
@@ -40,6 +41,11 @@ public abstract class Grid {
 
     public Complex add(Complex a, Complex b){
         return new Complex(a.getReal()+b.getReal(), a.getImaginary()+b.getImaginary());
+    }
+
+    public void setCenter(double real, double im){
+        center.setReal(real);
+        center.setImaginary(im);
     }
 
     public void setFixed(Complex fixed){
