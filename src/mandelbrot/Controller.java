@@ -13,7 +13,7 @@ import mandelbrot.view.CanvasView;
 import mandelbrot.view.UIContainer;
 
 public class Controller extends Application {
-    private static final int MAX_ITERATIONS = 1000;
+    private static final int MAX_ITERATIONS = 300;
     private static final int PANNING_SCALE = 80;
 
     private Scene stage;

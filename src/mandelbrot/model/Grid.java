@@ -27,7 +27,7 @@ public abstract class Grid {
             xPos = -width / 2 + center.getReal() + i * width / pixelsAcross;
             for (int j = 0; j < pixelsAcross; j++) {
                 yPos = -width / 2 + center.getImaginary() + j * width / pixelsAcross;
-                column.add(iterate(fixed, new Complex(xPos, yPos), (int) (maxIter / width)));
+                column.add(iterate(fixed, new Complex(xPos, yPos), (int) (maxIter / Math.sqrt(width))));
             }
             screen.add(column);
         }
