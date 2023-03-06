@@ -16,19 +16,19 @@ public class Controller extends Application {
     private static final int MAX_ITERATIONS = 300;
     private static final int PANNING_SCALE = 80;
 
-    private Scene stage;
-    private UIContainer scene;
+    private Scene scene;
+    private UIContainer uiContainer;
     private Grid rulebook;
     private boolean loaded;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         loaded = false;
-        scene = new UIContainer(MAX_ITERATIONS);
-        scene.getDropDown().setOnAction(handleDropDown());
-        stage = new Scene(scene.getPane(), CanvasView.WIDTH + 200, CanvasView.WIDTH);
-        stage.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
-        primaryStage.setScene(stage);
+        uiContainer = new UIContainer(MAX_ITERATIONS);
+        uiContainer.getDropDown().setOnAction(handleDropDown());
+        scene = new Scene(uiContainer.getPane(), CanvasView.WIDTH + 200, CanvasView.WIDTH);
+        scene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
@@ -36,7 +36,7 @@ public class Controller extends Application {
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 try {
-                    rulebook = (Grid) Class.forName("mandelbrot.model.rules." + scene.getDropDown().getValue())
+                    rulebook = (Grid) Class.forName("mandelbrot.model.rules." + uiContainer.getDropDown().getValue())
                             .getDeclaredConstructor(Integer.TYPE, Integer.TYPE)
                             .newInstance(CanvasView.WIDTH, MAX_ITERATIONS);
                 } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
@@ -102,7 +102,7 @@ public class Controller extends Application {
         rulebook.updateGrid(MAX_ITERATIONS);
         for (int i = 0; i < CanvasView.WIDTH; i++) {
             for (int j = 0; j < CanvasView.WIDTH; j++) {
-                scene.setPixel(i, j, rulebook.getPixelValue(i, j));
+                uiContainer.setPixel(i, j, rulebook.getPixelValue(i, j));
             }
         }
     }
