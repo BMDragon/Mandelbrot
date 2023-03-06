@@ -27,48 +27,48 @@ public abstract class Grid {
             xPos = -width / 2 + center.getReal() + i * width / pixelsAcross;
             for (int j = 0; j < pixelsAcross; j++) {
                 yPos = -width / 2 + center.getImaginary() + j * width / pixelsAcross;
-                column.add(iterate(fixed, new Complex(xPos, yPos), maxIter));
+                column.add(iterate(fixed, new Complex(xPos, yPos), (int) (maxIter / width)));
             }
             screen.add(column);
         }
     }
 
-    public Complex multiply(Complex a, Complex b){
-        double real = a.getReal()*b.getReal() - a.getImaginary()*b.getImaginary();
-        double im = a.getReal()*b.getImaginary() + a.getImaginary()*b.getReal();
+    public Complex multiply(Complex a, Complex b) {
+        double real = a.getReal() * b.getReal() - a.getImaginary() * b.getImaginary();
+        double im = a.getReal() * b.getImaginary() + a.getImaginary() * b.getReal();
         return new Complex(real, im);
     }
 
-    public Complex add(Complex a, Complex b){
-        return new Complex(a.getReal()+b.getReal(), a.getImaginary()+b.getImaginary());
+    public Complex add(Complex a, Complex b) {
+        return new Complex(a.getReal() + b.getReal(), a.getImaginary() + b.getImaginary());
     }
 
-    public void setCenter(double real, double im){
+    public void setCenter(double real, double im) {
         center.setReal(real);
         center.setImaginary(im);
     }
 
-    public void setFixed(Complex fixed){
+    public void setFixed(Complex fixed) {
         this.fixed = fixed;
     }
 
-    public void setWidth(double width){
+    public void setWidth(double width) {
         this.width = width;
     }
 
-    public double getWidth(){
+    public double getWidth() {
         return width;
     }
 
-    public int getPixelValue(int xIndex, int yIndex){
+    public int getPixelValue(int xIndex, int yIndex) {
         return screen.get(xIndex).get(yIndex);
     }
 
-    public double getCenterReal(){
+    public double getCenterReal() {
         return center.getReal();
     }
 
-    public double getCenterImaginary(){
+    public double getCenterImaginary() {
         return center.getImaginary();
     }
 
