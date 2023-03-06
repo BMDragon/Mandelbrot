@@ -7,7 +7,7 @@ import javafx.scene.text.Text;
 
 public class UIContainer {
     private static final String[] RULES = {"Mandelbrot", "Julia"};
-    private static final String INSTRUCTIONS = "Use WASD to pan.\nUp arrow zooms in.\nDown arrow zooms out.";
+    private static final String INSTRUCTIONS = "Use WASD to pan.\nE zooms in.\nQ zooms out.";
 
     private Pane pane;
     private CanvasView canvas;

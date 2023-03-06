@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.ScrollEvent;
 import javafx.stage.Stage;
 import mandelbrot.model.Grid;
 import mandelbrot.view.CanvasView;
@@ -29,7 +28,6 @@ public class Controller extends Application {
         scene.getDropDown().setOnAction(handleDropDown());
         stage = new Scene(scene.getPane(), CanvasView.WIDTH + 200, CanvasView.WIDTH);
         stage.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
-        stage.setOnScroll(e -> handleScroll(e));
         primaryStage.setScene(stage);
         primaryStage.show();
     }
@@ -58,38 +56,46 @@ public class Controller extends Application {
             case W -> {
                 if (loaded) {
                     rulebook.setCenter(rulebook.getCenterReal(),
-                            rulebook.getCenterImaginary() + rulebook.getWidth() / PANNING_SCALE);
+                            rulebook.getCenterImaginary() - rulebook.getWidth() / PANNING_SCALE);
                     backToFront();
                 }
             }
             case S -> {
                 if (loaded) {
                     rulebook.setCenter(rulebook.getCenterReal(),
-                            rulebook.getCenterImaginary() - rulebook.getWidth() / PANNING_SCALE);
+                            rulebook.getCenterImaginary() + rulebook.getWidth() / PANNING_SCALE);
                     backToFront();
                 }
             }
             case A -> {
-                if (loaded) {
-                    rulebook.setCenter(rulebook.getCenterReal() + rulebook.getWidth() / PANNING_SCALE,
-                            rulebook.getCenterImaginary());
-                    backToFront();
-                }
-            }
-            case D -> {
                 if (loaded) {
                     rulebook.setCenter(rulebook.getCenterReal() - rulebook.getWidth() / PANNING_SCALE,
                             rulebook.getCenterImaginary());
                     backToFront();
                 }
             }
+            case D -> {
+                if (loaded) {
+                    rulebook.setCenter(rulebook.getCenterReal() + rulebook.getWidth() / PANNING_SCALE,
+                            rulebook.getCenterImaginary());
+                    backToFront();
+                }
+            }
+            case E -> {
+                if (loaded) {
+                    rulebook.setWidth(rulebook.getWidth() * 0.9);
+                    backToFront();
+                }
+            }
+            case Q -> {
+                if (loaded) {
+                    rulebook.setWidth(rulebook.getWidth() / 0.9);
+                    backToFront();
+                }
+            }
             default -> {
             }
         }
-    }
-
-    private void handleScroll(ScrollEvent e) {
-
     }
 
     private void backToFront() {
