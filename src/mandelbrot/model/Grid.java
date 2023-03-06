@@ -14,7 +14,7 @@ public abstract class Grid {
     public Grid(int widthInPixels, int maxIter) {
         center = new Complex(0, 0);
         fixed = new Complex(0, 0);
-        this.width = INITIAL_WIDTH;
+        setWidth(INITIAL_WIDTH);
         pixelsAcross = widthInPixels;
         updateGrid(maxIter);
     }
@@ -50,6 +50,18 @@ public abstract class Grid {
 
     public void setFixed(Complex fixed){
         this.fixed = fixed;
+    }
+
+    public void setWidth(double width){
+        this.width = width;
+    }
+
+    public double getWidth(){
+        return width;
+    }
+
+    public int getPixelValue(int xIndex, int yIndex){
+        return screen.get(xIndex).get(yIndex);
     }
 
     public abstract int iterate(Complex fixed, Complex varied, int maxIter);
