@@ -14,7 +14,7 @@ import mandelbrot.view.UIContainer;
 
 public class Controller extends Application {
     private static final int BASE_ITERATIONS = 300;
-    private static final int PANNING_SCALE = 80;
+    private static final int PAN_AMOUNT = 20;
 
     private Scene scene;
     private UIContainer uiContainer;
@@ -55,29 +55,25 @@ public class Controller extends Application {
         switch (code) {
             case W -> {
                 if (loaded) {
-                    rulebook.setCenter(rulebook.getCenterReal(),
-                            rulebook.getCenterImaginary() - rulebook.getWidth() / PANNING_SCALE);
+                    rulebook.panUpUpdate(BASE_ITERATIONS, PAN_AMOUNT);
                     backToFront();
                 }
             }
             case S -> {
                 if (loaded) {
-                    rulebook.setCenter(rulebook.getCenterReal(),
-                            rulebook.getCenterImaginary() + rulebook.getWidth() / PANNING_SCALE);
+                    rulebook.panDownUpdate(BASE_ITERATIONS, PAN_AMOUNT);
                     backToFront();
                 }
             }
             case A -> {
                 if (loaded) {
-                    rulebook.setCenter(rulebook.getCenterReal() - rulebook.getWidth() / PANNING_SCALE,
-                            rulebook.getCenterImaginary());
+                    rulebook.panLeftUpdate(BASE_ITERATIONS, PAN_AMOUNT);
                     backToFront();
                 }
             }
             case D -> {
                 if (loaded) {
-                    rulebook.setCenter(rulebook.getCenterReal() + rulebook.getWidth() / PANNING_SCALE,
-                            rulebook.getCenterImaginary());
+                    rulebook.panRightUpdate(BASE_ITERATIONS, PAN_AMOUNT);
                     backToFront();
                 }
             }

@@ -33,8 +33,60 @@ public abstract class Grid {
         }
     }
 
-    public void panUpUpdate(int baseIter){
+    public void panDownUpdate(int baseIter, int panAmount) {
+        double xPos, yPos;
+        setCenter(center.getReal(), center.getImaginary() - panAmount * width / pixelsAcross);
+        for (int i = 0; i < pixelsAcross; i++) {
+            xPos = -width / 2 + center.getReal() + i * width / pixelsAcross;
+            for (int j = 0; j < panAmount; j++) {
+                yPos = -width / 2 + center.getImaginary() + (panAmount - j) * width / pixelsAcross;
+                screen.get(i).remove(screen.get(i).size() - 1);
+                screen.get(i).add(0, iterate(fixed, new Complex(xPos, yPos), (int) (baseIter / Math.sqrt(width))));
+            }
+        }
+    }
 
+    public void panUpUpdate(int baseIter, int panAmount) {
+        double xPos, yPos;
+        setCenter(center.getReal(), center.getImaginary() + panAmount * width / pixelsAcross);
+        for (int i = 0; i < pixelsAcross; i++) {
+            xPos = -width / 2 + center.getReal() + i * width / pixelsAcross;
+            for (int j = 0; j < panAmount; j++) {
+                yPos = width / 2 + center.getImaginary() - (panAmount - j) * width / pixelsAcross;
+                screen.get(i).remove(0);
+                screen.get(i).add(iterate(fixed, new Complex(xPos, yPos), (int) (baseIter / Math.sqrt(width))));
+            }
+        }
+    }
+
+    public void panRightUpdate(int baseIter, int panAmount) {
+        double xPos, yPos;
+        setCenter(center.getReal() - panAmount * width / pixelsAcross, center.getImaginary());
+        for (int i = 0; i < panAmount; i++) {
+            xPos = -width / 2 + center.getReal() + (panAmount - i) * width / pixelsAcross;
+            screen.remove(screen.size() - 1);
+            ArrayList<Integer> column = new ArrayList<>();
+            for (int j = 0; j < pixelsAcross; j++) {
+                yPos = -width / 2 + center.getImaginary() + j * width / pixelsAcross;
+                column.add(iterate(fixed, new Complex(xPos, yPos), (int) (baseIter / Math.sqrt(width))));
+            }
+            screen.add(0, column);
+        }
+    }
+
+    public void panLeftUpdate(int baseIter, int panAmount) {
+        double xPos, yPos;
+        setCenter(center.getReal() + panAmount * width / pixelsAcross, center.getImaginary());
+        for (int i = 0; i < panAmount; i++) {
+            xPos = width / 2 + center.getReal() - (panAmount - i) * width / pixelsAcross;
+            screen.remove(0);
+            ArrayList<Integer> column = new ArrayList<>();
+            for (int j = 0; j < pixelsAcross; j++) {
+                yPos = -width / 2 + center.getImaginary() + j * width / pixelsAcross;
+                column.add(iterate(fixed, new Complex(xPos, yPos), (int) (baseIter / Math.sqrt(width))));
+            }
+            screen.add(column);
+        }
     }
 
     public Complex multiply(Complex a, Complex b) {
@@ -66,14 +118,6 @@ public abstract class Grid {
 
     public int getPixelValue(int xIndex, int yIndex) {
         return screen.get(xIndex).get(yIndex);
-    }
-
-    public double getCenterReal() {
-        return center.getReal();
-    }
-
-    public double getCenterImaginary() {
-        return center.getImaginary();
     }
 
     public abstract int iterate(Complex fixed, Complex varied, int baseIter);
