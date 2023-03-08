@@ -13,7 +13,7 @@ import mandelbrot.view.CanvasView;
 import mandelbrot.view.UIContainer;
 
 public class Controller extends Application {
-    private static final int MAX_ITERATIONS = 300;
+    private static final int BASE_ITERATIONS = 300;
     private static final int PANNING_SCALE = 80;
 
     private Scene scene;
@@ -24,7 +24,7 @@ public class Controller extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         loaded = false;
-        uiContainer = new UIContainer(MAX_ITERATIONS);
+        uiContainer = new UIContainer(BASE_ITERATIONS);
         uiContainer.getDropDown().setOnAction(handleDropDown());
         scene = new Scene(uiContainer.getPane(), CanvasView.WIDTH + 200, CanvasView.WIDTH);
         scene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
@@ -38,7 +38,7 @@ public class Controller extends Application {
                 try {
                     rulebook = (Grid) Class.forName("mandelbrot.model.rules." + uiContainer.getDropDown().getValue())
                             .getDeclaredConstructor(Integer.TYPE, Integer.TYPE)
-                            .newInstance(CanvasView.WIDTH, MAX_ITERATIONS);
+                            .newInstance(CanvasView.WIDTH, BASE_ITERATIONS);
                 } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
                         | InvocationTargetException | NoSuchMethodException | SecurityException
                         | ClassNotFoundException e1) {
@@ -99,7 +99,6 @@ public class Controller extends Application {
     }
 
     private void backToFront() {
-        rulebook.updateGrid(MAX_ITERATIONS);
         for (int i = 0; i < CanvasView.WIDTH; i++) {
             for (int j = 0; j < CanvasView.WIDTH; j++) {
                 uiContainer.setPixel(i, j, rulebook.getPixelValue(i, j));

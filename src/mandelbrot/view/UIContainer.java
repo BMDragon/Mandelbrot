@@ -14,9 +14,9 @@ public class UIContainer {
     private ComboBox<String> dropDown;
     private Text text;
 
-    public UIContainer(int maxIter) {
+    public UIContainer(int baseIter) {
         pane = new Pane();
-        canvas = new CanvasView(maxIter);
+        canvas = new CanvasView(baseIter);
         dropDown = makeDropDown();
         text = setupText();
         pane.getChildren().addAll(canvas, dropDown, text);

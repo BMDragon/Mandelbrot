@@ -6,11 +6,11 @@ import javafx.scene.paint.Color;
 public class CanvasView extends Canvas {
     public static final int WIDTH = 500;
 
-    private int maxIter;
+    private int baseIter;
 
-    public CanvasView(int maxIter) {
+    public CanvasView(int baseIter) {
         super(WIDTH, WIDTH);
-        this.maxIter = maxIter;
+        this.baseIter = baseIter;
     }
 
     public void updatePixel(int xIndex, int yIndex, int numIter) {
@@ -18,7 +18,7 @@ public class CanvasView extends Canvas {
             getGraphicsContext2D().getPixelWriter().setColor(xIndex, yIndex, Color.BLACK);
         } else {
             getGraphicsContext2D().getPixelWriter().setColor(xIndex, yIndex,
-                    Color.rgb(10, 20, 40 + (numIter%maxIter) * 215 / maxIter));
+                    Color.rgb(10, 20, 40 + (numIter%baseIter) * 215 / baseIter));
         }
     }
 }

@@ -11,15 +11,15 @@ public abstract class Grid {
     private double width;
     private int pixelsAcross;
 
-    public Grid(int widthInPixels, int maxIter) {
+    public Grid(int widthInPixels, int baseIter) {
         center = new Complex(0, 0);
         fixed = new Complex(0, 0);
         setWidth(INITIAL_WIDTH);
         pixelsAcross = widthInPixels;
-        updateGrid(maxIter);
+        initGrid(baseIter);
     }
 
-    public void updateGrid(int maxIter) {
+    public void initGrid(int baseIter) {
         double xPos, yPos;
         screen = new ArrayList<>();
         for (int i = 0; i < pixelsAcross; i++) {
@@ -27,10 +27,14 @@ public abstract class Grid {
             xPos = -width / 2 + center.getReal() + i * width / pixelsAcross;
             for (int j = 0; j < pixelsAcross; j++) {
                 yPos = -width / 2 + center.getImaginary() + j * width / pixelsAcross;
-                column.add(iterate(fixed, new Complex(xPos, yPos), (int) (maxIter / Math.sqrt(width))));
+                column.add(iterate(fixed, new Complex(xPos, yPos), (int) (baseIter / Math.sqrt(width))));
             }
             screen.add(column);
         }
+    }
+
+    public void panUpUpdate(int baseIter){
+
     }
 
     public Complex multiply(Complex a, Complex b) {
@@ -72,5 +76,5 @@ public abstract class Grid {
         return center.getImaginary();
     }
 
-    public abstract int iterate(Complex fixed, Complex varied, int maxIter);
+    public abstract int iterate(Complex fixed, Complex varied, int baseIter);
 }
