@@ -80,12 +80,14 @@ public class Controller extends Application {
             case E -> {
                 if (loaded) {
                     rulebook.setWidth(rulebook.getWidth() * 0.9);
+                    rulebook.initGrid(BASE_ITERATIONS);
                     backToFront();
                 }
             }
             case Q -> {
                 if (loaded) {
                     rulebook.setWidth(rulebook.getWidth() / 0.9);
+                    rulebook.initGrid(BASE_ITERATIONS);
                     backToFront();
                 }
             }
