@@ -33,7 +33,7 @@ public abstract class Grid {
         }
     }
 
-    public void panDownUpdate(int baseIter, int panAmount) {
+    public void panUpUpdate(int baseIter, int panAmount) {
         double xPos, yPos;
         setCenter(center.getReal(), center.getImaginary() - panAmount * width / pixelsAcross);
         for (int i = 0; i < pixelsAcross; i++) {
@@ -46,7 +46,7 @@ public abstract class Grid {
         }
     }
 
-    public void panUpUpdate(int baseIter, int panAmount) {
+    public void panDownUpdate(int baseIter, int panAmount) {
         double xPos, yPos;
         setCenter(center.getReal(), center.getImaginary() + panAmount * width / pixelsAcross);
         for (int i = 0; i < pixelsAcross; i++) {
@@ -59,7 +59,7 @@ public abstract class Grid {
         }
     }
 
-    public void panRightUpdate(int baseIter, int panAmount) {
+    public void panLeftUpdate(int baseIter, int panAmount) {
         double xPos, yPos;
         setCenter(center.getReal() - panAmount * width / pixelsAcross, center.getImaginary());
         for (int i = 0; i < panAmount; i++) {
@@ -74,7 +74,7 @@ public abstract class Grid {
         }
     }
 
-    public void panLeftUpdate(int baseIter, int panAmount) {
+    public void panRightUpdate(int baseIter, int panAmount) {
         double xPos, yPos;
         setCenter(center.getReal() + panAmount * width / pixelsAcross, center.getImaginary());
         for (int i = 0; i < panAmount; i++) {
