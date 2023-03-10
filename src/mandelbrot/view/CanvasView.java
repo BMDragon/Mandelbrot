@@ -18,7 +18,7 @@ public class CanvasView extends Canvas {
             getGraphicsContext2D().getPixelWriter().setColor(xIndex, yIndex, Color.BLACK);
         } else {
             getGraphicsContext2D().getPixelWriter().setColor(xIndex, yIndex,
-                    Color.rgb(10, 20, 40 + (numIter%baseIter) * 215 / baseIter));
+                    Color.rgb(10, 20, 40 + (numIter % baseIter) * 215 / baseIter));
         }
     }
 }

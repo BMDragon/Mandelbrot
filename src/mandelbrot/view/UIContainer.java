@@ -6,7 +6,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 public class UIContainer {
-    private static final String[] RULES = {"Mandelbrot", "Julia"};
+    private static final String[] RULES = { "Mandelbrot", "Julia" };
     private static final String INSTRUCTIONS = "Use WASD to pan.\nE zooms in.\nQ zooms out.";
 
     private Pane pane;
@@ -22,19 +22,19 @@ public class UIContainer {
         pane.getChildren().addAll(canvas, dropDown, text);
     }
 
-    public Pane getPane(){
+    public Pane getPane() {
         return pane;
     }
 
-    public ComboBox<String> getDropDown(){
+    public ComboBox<String> getDropDown() {
         return dropDown;
     }
 
-    public void setPixel(int xIndex, int yIndex, int numIter){
+    public void setPixel(int xIndex, int yIndex, int numIter) {
         canvas.updatePixel(xIndex, yIndex, numIter);
     }
 
-    private ComboBox<String> makeDropDown(){
+    private ComboBox<String> makeDropDown() {
         ComboBox<String> ret = new ComboBox<>(FXCollections.observableArrayList(RULES));
         ret.setLayoutX(CanvasView.WIDTH + 30);
         ret.setLayoutY(60);
